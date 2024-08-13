@@ -119,7 +119,7 @@
 		if(4)
 			icon_state = "keyring4"
 
-/obj/item/keyring/proc/update_desc()
+/obj/item/keyring/update_desc()
 	if(keys.len)
 		desc = span_info("Holds \Roman[keys.len] key\s, including:")
 		for(var/obj/item/roguekey/KE in keys)

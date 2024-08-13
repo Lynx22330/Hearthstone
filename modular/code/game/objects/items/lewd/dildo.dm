@@ -35,7 +35,7 @@
 		var/shape_choice = input(user, "Choose a shape for your dildo.","Dildo Shape") as null|anything in list("knotted", "human", "flared")
 		if(src && shape_choice && !user.incapacitated() && in_range(user,src))
 			dildo_type = shape_choice
-	update_appearance()
+	update_dildo_appearance()
 	if(src && !user.incapacitated() && in_range(user,src))
 		var/size_choice = input(user, "Choose a size for your dildo.","Dildo Size") as null|anything in list("small", "medium", "big", "huge")
 		if(src && size_choice && !user.incapacitated() && in_range(user,src))
@@ -49,10 +49,10 @@
 					pleasure = 8
 				if("huge")
 					pleasure = 10
-	update_appearance()
+	update_dildo_appearance()
 	return TRUE
 
-/obj/item/dildo/proc/update_appearance()
+/obj/item/dildo/proc/update_dildo_appearance()
 	icon_state = "dildo_[dildo_type]_[dildo_size]"
 	name = "[dildo_size] [dildo_type] [dildo_material] dildo"
 	if(!istype(src, /obj/item/dildo/gold) && !istype(src, /obj/item/dildo/silver) && !istype(src, /obj/item/dildo/stone) && !istype(src, /obj/item/dildo/wood)) //will maintain desc

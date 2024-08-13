@@ -43,6 +43,9 @@ GLOBAL_VAR_INIT(farm_animals, FALSE)
 	var/obj/item/handcuffed = null //Whether or not the mob is handcuffed
 	var/obj/item/legcuffed = null  //Same as handcuffs but for legs. Bear traps use this.
 
+	//How fast can we attack? Or in this case, break our screen!
+	var/melee_attack_cooldown = 2 SECONDS
+
 	///When someone interacts with the simple animal.
 	///Help-intent verb in present continuous tense.
 	var/response_help_continuous = "pokes"
@@ -184,6 +187,29 @@ GLOBAL_VAR_INIT(farm_animals, FALSE)
 	update_simplemob_varspeed()
 //	if(dextrous)
 //		AddComponent(/datum/component/personal_crafting)
+
+/mob/living/simple_animal/proc/melee_attack(atom/target, list/modifiers, ignore_cooldown = FALSE) // Melee attack. Woo!
+	face_atom(target)
+	if (!ignore_cooldown)
+		changeNext_move(melee_attack_cooldown)
+	if(SEND_SIGNAL(src, COMSIG_HOSTILE_PRE_ATTACKINGTARGET, target, Adjacent(target), modifiers) & COMPONENT_HOSTILE_NO_ATTACK)
+		return FALSE //but more importantly return before attack_animal called
+	var/result = target.attack_basic_mob(src, modifiers)
+	SEND_SIGNAL(src, COMSIG_HOSTILE_POST_ATTACKINGTARGET, target, result)
+	return result
+
+///When a basic mob attacks something, either by AI or user.
+/atom/proc/attack_basic_mob(mob/user, list/modifiers)
+	SHOULD_CALL_PARENT(TRUE)
+	if(SEND_SIGNAL(src, COMSIG_ATOM_ATTACK_BASIC_MOB, user) & COMSIG_BASIC_ATTACK_CANCEL_CHAIN)
+		return
+	return handle_basic_attack(user, modifiers) //return value of attack animal, this is how much damage was dealt to the attacked thing
+
+///This exists so stuff can override the default call of attack_animal for attack_basic_mob
+///Remove this when simple animals are removed and everything can be handled on attack basic mob.
+/atom/proc/handle_basic_attack(user, modifiers)
+	return attack_animal(user, modifiers)
+
 
 /mob/living/simple_animal/Destroy()
 	GLOB.simple_animals[AIStatus] -= src

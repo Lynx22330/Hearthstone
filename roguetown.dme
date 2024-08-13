@@ -3573,4 +3573,10 @@
 #include "modular_hearthstone\code\modules\spells\roguetown\wizard.dm"
 #include "modular_hearthstone\code\modules\roguetown\roguejobs\cook\recipes\misc.dm"
 #include "modular_hearthstone\code\modules\food_and_drinks\food\snacks_other.dm"
+#include "modular_hearthstone\code\modules\mob\wormborntest.dm"
+#include "code\datums\components\mob_chain.dm" 
+#include "code\datums\components\leash.dm"
+#include "code\datums\components\basic_mob_attack_telegraph.dm"
+#include "code\__DEFINES\_flags.dm"
+// #include "code\game\atom\atom_appearance.dm
 // END_INCLUDE
