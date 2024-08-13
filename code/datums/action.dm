@@ -623,6 +623,12 @@
 	UpdateButtonIcon()
 	START_PROCESSING(SSfastprocess, src)
 
+/datum/action/cooldown/proc/Activate()
+	return
+
+/datum/action/cooldown/proc/Deactivate()
+	return
+
 /datum/action/cooldown/process()
 	if(!owner)
 		button.maptext = ""

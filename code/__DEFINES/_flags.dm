@@ -40,21 +40,6 @@
 /// This atom always returns its turf in get_turf_pixel instead of the turf from its offsets
 #define IGNORE_TURF_PIXEL_OFFSET_1 (1<<18)
 
-// Update flags for [/atom/proc/update_appearance]
-/// Update the atom's name
-#define UPDATE_NAME (1<<0)
-/// Update the atom's desc
-#define UPDATE_DESC (1<<1)
-/// Update the atom's icon state
-#define UPDATE_ICON_STATE (1<<2)
-/// Update the atom's overlays
-#define UPDATE_OVERLAYS (1<<3)
-/// Update the atom's greyscaling
-#define UPDATE_GREYSCALE (1<<4)
-/// Update the atom's smoothing. (More accurately, queue it for an update)
-#define UPDATE_SMOOTHING (1<<5)
-/// Update the atom's icon
-#define UPDATE_ICON (UPDATE_ICON_STATE|UPDATE_OVERLAYS)
 
 /// If the thing can reflect light (lasers/energy)
 #define RICOCHET_SHINY (1<<0)
@@ -166,43 +151,18 @@
 #define ZAP_FUSION_FLAGS ZAP_OBJ_DAMAGE | ZAP_MOB_DAMAGE | ZAP_MOB_STUN
 #define ZAP_SUPERMATTER_FLAGS ZAP_GENERATES_POWER
 
-///EMP will protect itself.
-#define EMP_PROTECT_SELF (1<<0)
-///EMP will protect the contents from also being EMPed.
-#define EMP_PROTECT_CONTENTS (1<<1)
-///EMP will protect the wires.
-#define EMP_PROTECT_WIRES (1<<2)
 
 ///Protects against all EMP types.
 #define EMP_PROTECT_ALL (EMP_PROTECT_SELF | EMP_PROTECT_CONTENTS | EMP_PROTECT_WIRES)
 
-//Mob mobility var flags
-/// can move
-#define MOBILITY_MOVE (1<<0)
-/// can, and is, standing up
-#define MOBILITY_STAND (1<<1)
-/// can pickup items
-#define MOBILITY_PICKUP (1<<2)
-/// can hold and use items
-#define MOBILITY_USE (1<<3)
-/// can use interfaces like machinery
-#define MOBILITY_UI (1<<4)
-/// can use storage item
-#define MOBILITY_STORAGE (1<<5)
-/// can pull things
-#define MOBILITY_PULL (1<<6)
 /// can rest
 #define MOBILITY_REST (1<<7)
 /// can lie down
 #define MOBILITY_LIEDOWN (1<<8)
 
-#define MOBILITY_FLAGS_DEFAULT (MOBILITY_MOVE | MOBILITY_STAND | MOBILITY_PICKUP | MOBILITY_USE | MOBILITY_UI | MOBILITY_STORAGE | MOBILITY_PULL)
 #define MOBILITY_FLAGS_CARBON_DEFAULT (MOBILITY_MOVE | MOBILITY_STAND | MOBILITY_PICKUP | MOBILITY_USE | MOBILITY_UI | MOBILITY_STORAGE | MOBILITY_PULL | MOBILITY_REST | MOBILITY_LIEDOWN)
 #define MOBILITY_FLAGS_REST_CAPABLE_DEFAULT (MOBILITY_MOVE | MOBILITY_STAND | MOBILITY_PICKUP | MOBILITY_USE | MOBILITY_UI | MOBILITY_STORAGE | MOBILITY_PULL | MOBILITY_REST | MOBILITY_LIEDOWN)
 
-//alternate appearance flags
-#define AA_TARGET_SEE_APPEARANCE (1<<0)
-#define AA_MATCH_TARGET_OVERLAYS (1<<1)
 
 #define KEEP_TOGETHER_ORIGINAL "keep_together_original"
 
@@ -236,17 +196,6 @@
 /// 33554431 (2^24 - 1) is the maximum value our bitflags can reach.
 #define MAX_BITFLAG_DIGITS 8
 
-// timed_action_flags parameter for `/proc/do_after`
-/// Can do the action even if mob moves location
-#define IGNORE_USER_LOC_CHANGE (1<<0)
-/// Can do the action even if the target moves location
-#define IGNORE_TARGET_LOC_CHANGE (1<<1)
-/// Can do the action even if the item is no longer being held
-#define IGNORE_HELD_ITEM (1<<2)
-/// Can do the action even if the mob is incapacitated (ex. handcuffed)
-#define IGNORE_INCAPACITATED (1<<3)
-/// Used to prevent important slowdowns from being abused by drugs like kronkaine
-#define IGNORE_SLOWDOWNS (1<<4)
 
 // Spacevine-related flags
 /// Is the spacevine / flower bud heat resistant
@@ -259,11 +208,6 @@
 #define FLORA_WOODEN (1 << 1)
 #define FLORA_STONE (1 << 2)
 
-// Bitflags for emotes, used in var/emote_type of the emote datum
-/// Is the emote audible
-#define EMOTE_AUDIBLE (1<<0)
-/// Is the emote visible
-#define EMOTE_VISIBLE (1<<1)
 /// Is it an emote that should be shown regardless of blindness/deafness
 #define EMOTE_IMPORTANT (1<<2)
 /// Emote only prints to runechat, not to the chat window

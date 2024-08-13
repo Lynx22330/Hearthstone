@@ -69,6 +69,18 @@
 	var/can_saddle = FALSE
 	var/obj/item/ssaddle
 
+	/// If true then damage we take is passed backwards along the line
+	var/pass_damage_back
+	/// If true then we will set our icon state based on line position
+	var/vary_icon_state
+
+	/// Mob in front of us in the chain
+	var/mob/living/simple_animal/front
+	/// Mob behind us in the chain
+	var/mob/living/simple_animal/back
+
+	//Seeing if this may help the mob_chain.dm. If it does, well shit I guess, huh? 
+
 /obj/item/natural/bone
 	name = "bone"
 	icon_state = "bone"

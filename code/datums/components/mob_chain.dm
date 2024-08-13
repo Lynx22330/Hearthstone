@@ -25,7 +25,7 @@
 	if (!isnull(front))
 		SEND_SIGNAL(front, COMSIG_MOB_GAINED_CHAIN_TAIL, parent)
 		parent.AddComponent(/datum/component/leash, owner = front, distance = 1) // Handles catching up gracefully
-		var/mob/living/simple_mob/living_parent = parent
+		var/mob/living/living_parent = parent
 		living_parent.set_glide_size(front.glide_size)
 
 /datum/component/mob_chain/Destroy(force)
@@ -209,14 +209,11 @@
 	name = "Force Contract"
 	desc = "Forces your body to contract onto a single tile."
 	background_icon_state = "bg_heretic"
-	var/overlay_icon_state = "bg_heretic_border"
+	// overlay_icon_state = "spell" 
 	button_icon = 'modular_hearthstone/icons/mob/actions/actions_ecult.dmi'
 	button_icon_state = "worm_contract"
 	cooldown_time = 30 SECONDS
-	
-/datum/action/cooldown/worm_contract/proc/Activate(atom/target)
+
+/datum/action/cooldown/worm_contract/Activate(atom/target)
 	SEND_SIGNAL(owner, COMSIG_MOB_CHAIN_CONTRACT)
 	StartCooldown()
-
-
-//Backported from modern TG station to here. For use with some antags.
